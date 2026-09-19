@@ -1,0 +1,16 @@
+# Cloudflare Worker (static assets) for the Kartify marketing landing page.
+# Serves ./public at the ROOT domain thekartify.com (and www). The apex is NOT
+# matched by the store's *.thekartify.com wildcard (that needs a subdomain label),
+# and the www route is more specific than the wildcard, so both win here.
+# Pure static — no build step; deploy command: npx wrangler deploy.
+name = "kartify-landing"
+compatibility_date = "2025-09-19"
+
+[assets]
+directory = "./public"
+not_found_handling = "single-page-application"
+
+routes = [
+  { pattern = "thekartify.com/*", zone_name = "thekartify.com" },
+  { pattern = "www.thekartify.com/*", zone_name = "thekartify.com" },
+]

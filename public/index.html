@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kartify — Launch your online store</title>
+<meta name="description" content="Kartify lets you launch a branded online store in minutes — ready-to-sell products, your own address, and UPI + WhatsApp checkout. No inventory, no code.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2316694F'/%3E%3Crect x='9' y='10' width='14' height='2.6' rx='1.3' fill='%23F7F6F2'/%3E%3Crect x='9' y='16' width='14' height='2.6' rx='1.3' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#F6F5F1; --surface:#FFFFFF; --ink:#17160F; --ink-soft:#57544B;
+    --line:#E5E2D9; --line-soft:#EEEBE3;
+    --accent:#16694F; --accent-press:#0F5540; --on-accent:#F7F6F2;
+    --accent-wash:#E7EFEA;
+    --font-display:"Schibsted Grotesk", system-ui, -apple-system, sans-serif;
+    --font-body:"Hanken Grotesk", system-ui, -apple-system, sans-serif;
+    --font-mono:"IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+    --maxw:1120px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#121210; --surface:#1B1A17; --ink:#F1EFE8; --ink-soft:#A6A296;
+      --line:#2B2A25; --line-soft:#242320;
+      --accent:#3BB68E; --accent-press:#4BC79E; --on-accent:#0B140F;
+      --accent-wash:#17251F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#121210; --surface:#1B1A17; --ink:#F1EFE8; --ink-soft:#A6A296;
+    --line:#2B2A25; --line-soft:#242320;
+    --accent:#3BB68E; --accent-press:#4BC79E; --on-accent:#0B140F;
+    --accent-wash:#17251F;
+  }
+
+  *{box-sizing:border-box}
+  html{color-scheme:light dark}
+  img{max-width:100%; height:auto}
+  [hidden]{display:none!important}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding-inline:24px}
+  @media (max-width:520px){ .wrap{padding-inline:18px} }
+
+  h1,h2,h3{font-family:var(--font-display); font-weight:700; letter-spacing:-0.02em; line-height:1.05; text-wrap:balance; margin:0}
+  p{margin:0}
+  a{color:inherit}
+  .eyebrow{font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft)}
+
+  /* ---- buttons ---- */
+  .btn{display:inline-flex; align-items:center; gap:9px; font-family:var(--font-display); font-weight:600; font-size:15px;
+    border-radius:999px; padding:13px 22px; cursor:pointer; border:1px solid transparent; text-decoration:none; transition:transform .15s ease, background .15s ease, border-color .15s ease}
+  .btn-primary{background:var(--accent); color:var(--on-accent)}
+  .btn-primary:hover{background:var(--accent-press); transform:translateY(-1px)}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--ink); transform:translateY(-1px)}
+  .btn svg{width:16px;height:16px}
+
+  /* ---- nav ---- */
+  header.nav{position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--paper) 86%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line-soft)}
+  .nav-in{display:flex; align-items:center; justify-content:space-between; height:66px}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; font-size:19px; letter-spacing:-0.03em; text-decoration:none; color:var(--ink)}
+  .brand .mark{width:22px; height:22px; border-radius:7px; background:var(--accent); position:relative; flex:0 0 auto}
+  .brand .mark::after{content:""; position:absolute; inset:6px 6px auto 6px; height:2px; border-radius:2px; background:var(--on-accent); box-shadow:0 4px 0 var(--on-accent)}
+  .nav-right{display:flex; align-items:center; gap:8px}
+  .nav-link{font-size:14px; color:var(--ink-soft); text-decoration:none; padding:8px 12px; border-radius:8px}
+  .nav-link:hover{color:var(--ink)}
+  .icon-btn{display:grid; place-items:center; width:38px; height:38px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--ink); cursor:pointer}
+  .icon-btn:hover{border-color:var(--ink)}
+  .icon-btn svg{width:17px;height:17px}
+  @media (max-width:640px){ .nav-link.hide-sm{display:none} }
+
+  /* ---- hero ---- */
+  .hero{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; padding-block:78px 64px}
+  @media (max-width:900px){ .hero{grid-template-columns:1fr; gap:44px; padding-block:52px 44px} }
+  .hero h1{font-size:clamp(2.6rem, 6.2vw, 4.35rem); font-weight:800}
+  .hero .lede{margin-top:22px; font-size:clamp(1.05rem,1.6vw,1.24rem); color:var(--ink-soft); max-width:34ch}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:32px}
+  .addr{margin-top:26px; display:inline-flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13.5px; color:var(--ink-soft);
+    background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 14px}
+  .addr b{color:var(--ink); font-weight:500}
+  .addr .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:0 0 auto}
+
+  /* ---- storefront mock ---- */
+  .mock{background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:0 24px 60px -34px rgba(20,18,10,.4)}
+  .mock-bar{display:flex; align-items:center; gap:8px; padding:12px 14px; border-bottom:1px solid var(--line-soft)}
+  .mock-bar .u{flex:1; font-family:var(--font-mono); font-size:12px; color:var(--ink-soft); background:var(--paper); border:1px solid var(--line-soft); border-radius:7px; padding:6px 10px; text-align:center; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+  .mock-bar i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+  .mock-body{padding:18px}
+  .mock-hero{border-radius:11px; padding:20px; background:linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 62%, #000)); color:var(--on-accent)}
+  .mock-hero .k{font-family:var(--font-mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; opacity:.8}
+  .mock-hero .t{font-family:var(--font-display); font-weight:700; font-size:20px; margin-top:6px; line-height:1.1}
+  .mock-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px}
+  .mock-card{border:1px solid var(--line-soft); border-radius:9px; padding:9px}
+  .mock-card .sw{height:52px; border-radius:6px; background:var(--accent-wash)}
+  .mock-card .l{height:7px; width:78%; background:var(--line); border-radius:4px; margin-top:9px}
+  .mock-card .pr{font-family:var(--font-mono); font-size:11px; color:var(--ink); margin-top:7px}
+
+  /* ---- section frame ---- */
+  section{padding-block:64px}
+  .sec-head{max-width:56ch}
+  .sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem); margin-top:14px}
+  .sec-head p{margin-top:14px; color:var(--ink-soft); font-size:1.06rem}
+  .rule{height:1px; background:var(--line); border:0; margin:0}
+
+  /* ---- steps ---- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:44px}
+  @media (max-width:820px){ .steps{grid-template-columns:1fr; gap:0} }
+  .step{position:relative}
+  @media (max-width:820px){ .step{padding-block:26px; border-top:1px solid var(--line)} .step:first-child{border-top:0} }
+  .step .n{font-family:var(--font-display); font-weight:800; font-size:15px; color:var(--accent); font-variant-numeric:tabular-nums}
+  .step h3{font-size:1.32rem; margin-top:14px; letter-spacing:-0.01em}
+  .step p{margin-top:10px; color:var(--ink-soft); font-size:0.99rem}
+
+  /* ---- features ---- */
+  .feat{display:grid; grid-template-columns:repeat(3,1fr); margin-top:44px; border:1px solid var(--line); border-radius:16px; overflow:hidden}
+  @media (max-width:820px){ .feat{grid-template-columns:1fr} }
+  .feat > div{padding:26px 24px; border-right:1px solid var(--line); border-bottom:1px solid var(--line)}
+  @media (min-width:821px){ .feat > div:nth-child(3n){border-right:0} .feat > div:nth-last-child(-n+3){border-bottom:0} }
+  @media (max-width:820px){ .feat > div{border-right:0} .feat > div:last-child{border-bottom:0} }
+  .feat h3{font-size:1.08rem; letter-spacing:-0.01em; display:flex; align-items:center; gap:10px}
+  .feat h3 .b{width:8px;height:8px;border-radius:2px;background:var(--accent);flex:0 0 auto}
+  .feat p{margin-top:9px; color:var(--ink-soft); font-size:0.95rem}
+
+  /* ---- address band ---- */
+  .band{background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:48px; display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center}
+  @media (max-width:760px){ .band{grid-template-columns:1fr; padding:32px; text-align:left} }
+  .band h2{font-size:clamp(1.7rem,3vw,2.3rem)}
+  .band p{margin-top:12px; color:var(--ink-soft); max-width:44ch}
+  .urls{display:flex; flex-direction:column; gap:10px}
+  .url{font-family:var(--font-mono); font-size:14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:11px 15px; white-space:nowrap}
+  .url b{color:var(--accent); font-weight:500}
+
+  /* ---- pricing teaser ---- */
+  .price{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:40px}
+  @media (max-width:680px){ .price{grid-template-columns:1fr} }
+  .plan{border:1px solid var(--line); border-radius:16px; padding:28px; background:var(--surface)}
+  .plan .tag{font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft)}
+  .plan .amt{font-family:var(--font-display); font-weight:800; font-size:2rem; margin-top:10px; letter-spacing:-0.02em}
+  .plan .amt small{font-family:var(--font-body); font-weight:500; font-size:0.9rem; color:var(--ink-soft)}
+  .plan p{margin-top:10px; color:var(--ink-soft); font-size:0.96rem}
+  .plan.feature{border-color:var(--accent); box-shadow:0 0 0 1px var(--accent)}
+
+  /* ---- faq ---- */
+  .faq{margin-top:40px; border-top:1px solid var(--line)}
+  details{border-bottom:1px solid var(--line)}
+  summary{list-style:none; cursor:pointer; padding:22px 0; display:flex; justify-content:space-between; align-items:center; gap:20px; font-family:var(--font-display); font-weight:600; font-size:1.12rem}
+  summary::-webkit-details-marker{display:none}
+  summary .pl{width:20px;height:20px;flex:0 0 auto;position:relative}
+  summary .pl::before,summary .pl::after{content:"";position:absolute;background:var(--accent);border-radius:2px;transition:transform .2s ease}
+  summary .pl::before{inset:9px 0;height:2px}
+  summary .pl::after{inset:0 9px;width:2px}
+  details[open] summary .pl::after{transform:scaleY(0)}
+  details p{padding:0 0 22px; color:var(--ink-soft); max-width:64ch}
+
+  /* ---- final cta ---- */
+  .final{text-align:center; background:var(--ink); color:var(--paper); border-radius:24px; padding:72px 32px; margin-block:20px}
+  .final h2{font-size:clamp(2rem,4.4vw,3.1rem); color:var(--paper)}
+  .final p{margin-top:16px; color:color-mix(in srgb, var(--paper) 68%, transparent); max-width:46ch; margin-inline:auto}
+  .final .btn-primary{margin-top:30px; padding:15px 30px; font-size:16px}
+  .final .addr{margin-top:22px; background:transparent; border-color:color-mix(in srgb,var(--paper) 24%, transparent); color:color-mix(in srgb,var(--paper) 74%, transparent)}
+  .final .addr b{color:var(--paper)}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line); padding-block:40px; margin-top:20px}
+  .foot{display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap}
+  .foot .brand{font-size:17px}
+  .foot .meta{color:var(--ink-soft); font-size:13.5px}
+  .foot a{color:var(--ink-soft); text-decoration:none; font-size:14px; margin-left:18px}
+  .foot a:hover{color:var(--ink)}
+
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="mark"></span>Kartify</a>
+    <nav class="nav-right">
+      <a class="nav-link hide-sm" href="#how">How it works</a>
+      <a class="nav-link hide-sm" href="#pricing">Pricing</a>
+      <a class="nav-link" href="https://app.thekartify.com">Log in</a>
+      <button class="icon-btn" id="theme" aria-label="Toggle dark mode" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2 12h2.2M19.8 12H22M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
+      </button>
+      <a class="btn btn-primary" href="https://app.thekartify.com">Start free</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero" style="padding-top:78px">
+      <div>
+        <span class="eyebrow">The storefront platform</span>
+        <h1 style="margin-top:20px">Sell online.<br>No inventory, no code.</h1>
+        <p class="lede">Kartify gives you a branded storefront, ready-to-sell products, and UPI&nbsp;+ WhatsApp checkout — so you can open shop today and grow from there.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://app.thekartify.com">Start free
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="https://wop.thekartify.com">See a live store</a>
+        </div>
+        <div class="addr"><span class="dot"></span>Your store lives at <b>yourname.thekartify.com</b></div>
+      </div>
+
+      <!-- storefront mock -->
+      <div class="mock" aria-hidden="true">
+        <div class="mock-bar"><i></i><span class="u">yourname.thekartify.com</span></div>
+        <div class="mock-body">
+          <div class="mock-hero"><div class="k">New season</div><div class="t">Your brand,<br>front and centre</div></div>
+          <div class="mock-grid">
+            <div class="mock-card"><div class="sw"></div><div class="l"></div><div class="pr">₹1,299</div></div>
+            <div class="mock-card"><div class="sw"></div><div class="l"></div><div class="pr">₹899</div></div>
+            <div class="mock-card"><div class="sw"></div><div class="l"></div><div class="pr">₹2,150</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <hr class="rule">
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps to your first sale.</h2>
+      <p>No sourcing, no developers, no upfront cost. Kartify handles the products, the payments, and the tech — you handle the brand.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">01</div>
+        <h3>Pick your products</h3>
+        <p>Browse ready catalogues and add whatever you want to sell. Never hold stock or pay upfront — pricing is yours to set.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h3>Make it yours</h3>
+        <p>Your name, logo, colours and layout. A premium storefront that looks built for your brand — in a few clicks, no code.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h3>Share &amp; sell</h3>
+        <p>Send your link. Customers order and pay by UPI or confirm on WhatsApp. Track every visit and order from one dashboard.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Why Kartify</span>
+      <h2>Everything a shop needs. Nothing you don't.</h2>
+    </div>
+    <div class="feat">
+      <div><h3><span class="b"></span>No inventory</h3><p>Sell from ready catalogues — we handle sourcing and stock, you keep the margin.</p></div>
+      <div><h3><span class="b"></span>No code</h3><p>A guided setup builds the storefront for you. If you can fill a form, you can launch.</p></div>
+      <div><h3><span class="b"></span>Your own address</h3><p>Launch on <span style="font-family:var(--font-mono);font-size:.9em">name.thekartify.com</span>, or connect a domain you own.</p></div>
+      <div><h3><span class="b"></span>UPI &amp; WhatsApp</h3><p>Get paid the way India already pays — instant UPI, or confirm the order on WhatsApp.</p></div>
+      <div><h3><span class="b"></span>Ready-made themes</h3><p>Premium layouts that make any catalogue look considered, on phone and desktop.</p></div>
+      <div><h3><span class="b"></span>Real analytics</h3><p>Visitors, orders and revenue at a glance — know what's working and what to stock next.</p></div>
+    </div>
+  </section>
+
+  <!-- ADDRESS BAND -->
+  <section class="wrap">
+    <div class="band">
+      <div>
+        <span class="eyebrow">Your own corner of the web</span>
+        <h2 style="margin-top:14px">A link that's unmistakably yours.</h2>
+        <p>Every store gets its own address the moment it's live. Start on a Kartify subdomain, upgrade to your own domain whenever you're ready.</p>
+      </div>
+      <div class="urls">
+        <div class="url"><b>aanya</b>.thekartify.com</div>
+        <div class="url"><b>studionorth</b>.thekartify.com</div>
+        <div class="url"><b>yourshop</b>.com</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Pricing</span>
+      <h2>Start free. Upgrade when you grow.</h2>
+      <p>Open your store at no cost and start taking orders today. Move to a paid plan only when you want your own domain, higher limits and more.</p>
+    </div>
+    <div class="price">
+      <div class="plan">
+        <div class="tag">Free</div>
+        <div class="amt">₹0<small> / forever to start</small></div>
+        <p>A full storefront on your Kartify address, ready-to-sell catalogues, UPI &amp; WhatsApp checkout, and orders in one dashboard.</p>
+      </div>
+      <div class="plan feature">
+        <div class="tag">Pro</div>
+        <div class="amt">Grow<small> / when you're ready</small></div>
+        <p>Your own custom domain, premium themes, deeper analytics, and higher limits — everything to scale past your first customers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Questions</span>
+      <h2>Good to know.</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>Do I need my own products?<span class="pl"></span></summary><p>No. Pick from Kartify's ready catalogues — we handle sourcing and stock. You choose what to sell, set your prices, and keep the margin. Bringing your own products is optional, not required.</p></details>
+      <details><summary>How do my customers pay?<span class="pl"></span></summary><p>Customers pay by UPI, or send the order to you on WhatsApp to confirm. You can also switch on an automated payment gateway that verifies payments for you — your choice, per store.</p></details>
+      <details><summary>Can I use my own domain?<span class="pl"></span></summary><p>Yes. Every store starts on a free <span style="font-family:var(--font-mono);font-size:.9em">name.thekartify.com</span> address, and you can connect any domain you own whenever you're ready.</p></details>
+      <details><summary>What does it cost to start?<span class="pl"></span></summary><p>Nothing. Open your store and take orders on the free plan. Paid plans unlock a custom domain, higher limits and more — only when you need them.</p></details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <div class="wrap">
+    <section class="final">
+      <span class="eyebrow" style="color:color-mix(in srgb,var(--paper) 62%, transparent)">Open shop</span>
+      <h2 style="margin-top:16px">Your store could be live<br>by the end of today.</h2>
+      <p>Pick your products, add your brand, share your link. Kartify does the rest.</p>
+      <a class="btn btn-primary" href="https://app.thekartify.com">Start free
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <div class="addr"><span class="dot"></span>Claim <b>yourname.thekartify.com</b></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="#top"><span class="mark"></span>Kartify</a>
+    <div class="meta">© 2026 Kartify — launch your store, minus the hard parts.</div>
+    <nav>
+      <a href="https://app.thekartify.com">Start free</a>
+      <a href="https://app.thekartify.com">Log in</a>
+      <a href="#how">How it works</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var root=document.documentElement, KEY="kartify-theme";
+    function sysDark(){ return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
+    function cur(){ return root.getAttribute("data-theme") || (sysDark()?"dark":"light"); }
+    try{ var s=localStorage.getItem(KEY); if(s) root.setAttribute("data-theme", s); }catch(e){}
+    document.getElementById("theme").addEventListener("click", function(){
+      var next = cur()==="dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try{ localStorage.setItem(KEY, next); }catch(e){}
+    });
+  })();
+</script>
+</body>
+</html>
