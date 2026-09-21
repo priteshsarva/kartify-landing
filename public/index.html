@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kartify — Launch your online store</title>
-<meta name="description" content="Kartify lets you launch a branded online store in minutes — ready-to-sell products, your own address, and UPI + WhatsApp checkout. No inventory, no code.">
+<meta name="description" content="Search thousands of products across JD & Selloship, launch a branded store in minutes, and get paid with a built-in payment gateway. No inventory, no code.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2316694F'/%3E%3Crect x='9' y='10' width='14' height='2.6' rx='1.3' fill='%23F7F6F2'/%3E%3Crect x='9' y='16' width='14' height='2.6' rx='1.3' fill='%23F7F6F2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,18 +73,29 @@
   .icon-btn{display:grid; place-items:center; width:38px; height:38px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--ink); cursor:pointer}
   .icon-btn:hover{border-color:var(--ink)}
   .icon-btn svg{width:17px;height:17px}
-  @media (max-width:640px){ .nav-link.hide-sm{display:none} }
+  @media (max-width:760px){ .nav-link.hide-sm{display:none} }
 
   /* ---- hero ---- */
-  .hero{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; padding-block:78px 64px}
-  @media (max-width:900px){ .hero{grid-template-columns:1fr; gap:44px; padding-block:52px 44px} }
+  .hero{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; padding-block:74px 30px}
+  @media (max-width:900px){ .hero{grid-template-columns:1fr; gap:44px; padding-block:48px 24px} }
   .hero h1{font-size:clamp(2.6rem, 6.2vw, 4.35rem); font-weight:800}
-  .hero .lede{margin-top:22px; font-size:clamp(1.05rem,1.6vw,1.24rem); color:var(--ink-soft); max-width:34ch}
-  .hero-cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:32px}
-  .addr{margin-top:26px; display:inline-flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13.5px; color:var(--ink-soft);
+  .hero .lede{margin-top:22px; font-size:clamp(1.05rem,1.6vw,1.24rem); color:var(--ink-soft); max-width:36ch}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
+  .addr{margin-top:24px; display:inline-flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13.5px; color:var(--ink-soft);
     background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 14px}
   .addr b{color:var(--ink); font-weight:500}
   .addr .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:0 0 auto}
+
+  /* ---- hero search ---- */
+  .herosearch{margin-top:26px; display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:8px 8px 8px 14px; box-shadow:0 10px 30px -22px rgba(20,18,10,.5); max-width:520px}
+  .herosearch:focus-within{border-color:var(--accent)}
+  .herosearch svg{width:18px;height:18px;color:var(--ink-soft);flex:0 0 auto}
+  .herosearch input{flex:1; min-width:0; border:0; outline:0; background:transparent; color:var(--ink); font-family:var(--font-body); font-size:15px}
+  .herosearch input::placeholder{color:var(--ink-soft)}
+  .herosearch .btn{padding:10px 18px; font-size:14px; white-space:nowrap}
+  .hero-note{margin-top:10px; font-size:12.5px; color:var(--ink-soft)}
+  .hero-note b{color:var(--ink); font-weight:600}
 
   /* ---- storefront mock ---- */
   .mock{background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:0 24px 60px -34px rgba(20,18,10,.4)}
@@ -103,10 +114,84 @@
 
   /* ---- section frame ---- */
   section{padding-block:64px}
+  #search,#sell{scroll-margin-top:80px}
   .sec-head{max-width:56ch}
   .sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem); margin-top:14px}
   .sec-head p{margin-top:14px; color:var(--ink-soft); font-size:1.06rem}
   .rule{height:1px; background:var(--line); border:0; margin:0}
+
+  /* ---- catalogue search ---- */
+  .sbox{margin-top:26px; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px; box-shadow:0 10px 34px -28px rgba(20,18,10,.5)}
+  .srow{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  .srow + .srow{margin-top:10px}
+  .sinput{font-family:var(--font-body); font-size:14px; color:var(--ink); background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:11px 13px; outline:none}
+  .sinput:focus{border-color:var(--accent)}
+  select.sinput{cursor:pointer}
+  .sfield{position:relative; flex:1; min-width:220px}
+  .sfield svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--ink-soft)}
+  .sfield input{width:100%; padding-left:36px}
+  .price-range{display:flex; align-items:center; gap:6px}
+  .price-range .sinput{width:96px}
+  .price-range span{color:var(--ink-soft)}
+  .smeta{justify-content:space-between}
+  .chip-add{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-size:13px; font-weight:600;
+    background:var(--accent-wash); color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 40%, transparent); border-radius:9px; padding:8px 12px}
+  .chip-add:hover{border-color:var(--accent)}
+  .link-clear{background:none; border:0; color:var(--accent); font-size:12.5px; cursor:pointer; font-family:var(--font-body)}
+  .quota{font-size:13px; color:var(--ink-soft)}
+  .quota b{color:var(--ink)}
+  .serr{background:color-mix(in srgb,#d92d20 12%, var(--surface)); border:1px solid color-mix(in srgb,#d92d20 40%, transparent); color:#c0392b; padding:9px 13px; border-radius:9px; margin-top:14px; font-size:13px}
+
+  .pgrid{display:grid; grid-template-columns:repeat(auto-fill, minmax(178px,1fr)); gap:14px; margin-top:22px}
+  .pcard{border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface); display:flex; flex-direction:column; cursor:pointer; transition:transform .12s ease, border-color .12s ease}
+  .pcard:hover{transform:translateY(-2px); border-color:var(--accent)}
+  .pthumb{aspect-ratio:1/1; background:var(--paper); position:relative}
+  .pthumb img{width:100%; height:100%; object-fit:cover; display:block}
+  .pthumb .noimg{display:grid; place-items:center; height:100%; color:var(--ink-soft); font-size:12px}
+  .pthumb .oos{position:absolute; top:8px; left:8px; background:#d92d20; color:#fff; font-size:10px; font-weight:600; padding:2px 7px; border-radius:4px}
+  .pthumb .pcat{position:absolute; top:8px; right:8px; background:var(--surface); color:var(--ink-soft); font-size:10px; padding:2px 7px; border-radius:4px; text-transform:capitalize; border:1px solid var(--line-soft)}
+  .pbody{padding:11px; display:flex; flex-direction:column; gap:4px; flex:1}
+  .pbrand{font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft)}
+  .pname{font-size:12.5px; line-height:1.35; min-height:34px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+  .pprice{font-weight:700; font-size:14px; font-family:var(--font-display)}
+  .psizes{font-size:10.5px; color:var(--ink-soft)}
+  .popen{margin-top:auto; display:inline-flex; align-items:center; gap:4px; font-size:11.5px; color:var(--accent); padding-top:6px}
+  .sstate{text-align:center; color:var(--ink-soft); padding:40px 0; font-size:14px}
+  .morewrap{text-align:center; margin-top:24px}
+
+  /* ---- gate modal ---- */
+  .gate{position:fixed; inset:0; background:rgba(14,13,9,.55); display:grid; place-items:center; z-index:1000; padding:18px}
+  .gate-card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:28px; width:100%; max-width:400px; position:relative; text-align:center}
+  .gate-card h3{font-size:1.35rem}
+  .gate-card p{margin-top:10px; color:var(--ink-soft); font-size:.98rem}
+  .gate-card .btn{margin-top:18px}
+  .gate-x{position:absolute; top:12px; right:14px; background:none; border:0; font-size:22px; line-height:1; color:var(--ink-soft); cursor:pointer}
+  .otp-row{display:flex; align-items:center; gap:8px}
+  .otp-row .cc{flex:0 0 auto; background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:11px 13px; color:var(--ink-soft); font-size:14px}
+  .otp-btn{width:100%; margin-top:12px; justify-content:center}
+  #promo .serr{text-align:left}
+
+  /* ---- your own store + payment gateway ---- */
+  .gwrap{display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center; margin-top:8px}
+  @media (max-width:900px){ .gwrap{grid-template-columns:1fr; gap:36px} }
+  .gwrap h2{font-size:clamp(1.9rem,3.4vw,2.7rem); margin-top:14px}
+  .gwrap > .gleft > p{margin-top:16px; color:var(--ink-soft); font-size:1.06rem; max-width:52ch}
+  .gpoints{list-style:none; margin:22px 0 0; padding:0; display:grid; gap:12px}
+  .gpoints li{display:flex; gap:11px; font-size:.98rem; color:var(--ink-soft); line-height:1.5}
+  .gpoints li b{color:var(--ink); font-weight:600}
+  .gpoints li::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--accent); flex:0 0 auto; margin-top:9px}
+  .gleft .btn{margin-top:26px}
+  /* checkout mock */
+  .cmock{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px; box-shadow:0 24px 60px -34px rgba(20,18,10,.4)}
+  .cmock-top{font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft)}
+  .cmock-line{display:flex; justify-content:space-between; align-items:baseline; margin-top:14px; padding-bottom:14px; border-bottom:1px solid var(--line-soft)}
+  .cmock-line b{font-family:var(--font-display); font-size:1.9rem; font-weight:800}
+  .cmock-upi{display:flex; align-items:center; gap:9px; margin-top:16px; font-size:14px; color:var(--ink)}
+  .cmock-upi .upi-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:0 0 auto; box-shadow:0 0 0 4px var(--accent-wash)}
+  .cmock-btn{margin-top:16px; background:var(--accent); color:var(--on-accent); text-align:center; font-family:var(--font-display); font-weight:700; border-radius:11px; padding:13px; font-size:15px}
+  .cmock-foot{margin-top:14px; font-size:12.5px; color:var(--accent); display:flex; align-items:center; gap:7px; justify-content:center}
+  .vs{margin-top:18px; font-size:12.5px; color:var(--ink-soft); font-family:var(--font-mono); text-align:center}
+  .vs b{color:var(--ink)}
 
   /* ---- steps ---- */
   .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:44px}
@@ -183,6 +268,7 @@
   <div class="wrap nav-in">
     <a class="brand" href="#top"><span class="mark"></span>Kartify</a>
     <nav class="nav-right">
+      <a class="nav-link hide-sm" href="#search">Search products</a>
       <a class="nav-link hide-sm" href="#how">How it works</a>
       <a class="nav-link hide-sm" href="#pricing">Pricing</a>
       <a class="nav-link" href="https://app.thekartify.com">Log in</a>
@@ -197,18 +283,25 @@
 <main id="top">
   <div class="wrap">
     <!-- HERO -->
-    <section class="hero" style="padding-top:78px">
+    <section class="hero" style="padding-top:74px">
       <div>
         <span class="eyebrow">The storefront platform</span>
         <h1 style="margin-top:20px">Sell online.<br>No inventory, no code.</h1>
-        <p class="lede">Kartify gives you a branded storefront, ready-to-sell products, and UPI&nbsp;+ WhatsApp checkout — so you can open shop today and grow from there.</p>
+        <p class="lede">Search thousands of products across JD &amp; Selloship, add your brand, and get paid with a built-in payment gateway — open shop today.</p>
+
+        <form class="herosearch" id="heroform" role="search" aria-label="Search products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="heroq" name="q" placeholder="Search any product — across JD &amp; Selloship…" autocomplete="off">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <p class="hero-note">Search <b>free</b>, no login. JDWebnship + Selloship + <b>1000+ wholesalers</b> others don't list.</p>
+
         <div class="hero-cta">
           <a class="btn btn-primary" href="https://app.thekartify.com">Start free
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a class="btn btn-ghost" href="https://wop.thekartify.com">See a live store</a>
+          <a class="btn btn-ghost" href="https://wop.thekartify.com" target="_blank" rel="noopener">See a live store</a>
         </div>
-        <div class="addr"><span class="dot"></span>Your store lives at <b>yourname.thekartify.com</b></div>
       </div>
 
       <!-- storefront mock -->
@@ -226,6 +319,83 @@
     </section>
   </div>
 
+  <!-- CATALOGUE SEARCH -->
+  <section id="search" class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Live catalogue</span>
+      <h2>Search everything you can sell.</h2>
+      <p>Every product across JD, Selloship and our reseller network — plus unregistered wholesalers that other platforms don't list. Browse free; sign up when you want to save products and start selling.</p>
+    </div>
+
+    <div class="sbox">
+      <div class="srow">
+        <div class="sfield">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input class="sinput" id="q" placeholder="Search by product name or brand…" autocomplete="off">
+        </div>
+        <select class="sinput" id="category" style="min-width:130px">
+          <option value="">All categories</option><option value="watches">Watches</option><option value="shoes">Shoes</option>
+        </select>
+        <select class="sinput" id="stock" style="min-width:120px">
+          <option value="in">In stock</option><option value="">All stock</option><option value="out">Out of stock</option>
+        </select>
+        <select class="sinput" id="sort" style="min-width:150px">
+          <option value="newest">Newest</option><option value="price_asc">Price: low → high</option><option value="price_desc">Price: high → low</option><option value="name">Name A–Z</option>
+        </select>
+      </div>
+      <div class="srow">
+        <input class="sinput" id="brand" placeholder="Brand (e.g. Rolex)" style="width:150px" autocomplete="off">
+        <input class="sinput" id="size" placeholder="Size" style="width:100px" autocomplete="off">
+        <select class="sinput" id="source" style="min-width:170px"><option value="">All sources</option></select>
+        <div class="price-range">
+          <input class="sinput" id="pmin" type="number" placeholder="₹ min"><span>–</span><input class="sinput" id="pmax" type="number" placeholder="₹ max">
+        </div>
+        <button class="link-clear" id="clear" hidden>Clear filters</button>
+      </div>
+      <div class="srow smeta">
+        <a class="chip-add" href="https://app.thekartify.com">＋ Add Selloship or JDWebnship sites</a>
+        <span class="quota" id="quota"></span>
+      </div>
+    </div>
+
+    <div class="serr" id="serr" hidden></div>
+    <div class="pgrid" id="results"></div>
+    <div class="sstate" id="sstate">Loading…</div>
+    <div class="morewrap" id="more-wrap" hidden><button class="btn btn-ghost" id="more">Load more</button></div>
+  </section>
+
+  <!-- YOUR OWN STORE + PAYMENT GATEWAY -->
+  <section id="sell" class="wrap">
+    <div class="gwrap">
+      <div class="gleft">
+        <span class="eyebrow">Your own store</span>
+        <h2>Found a product? Sell it — with a payment gateway built in.</h2>
+        <p>JD and Selloship give you products. They don't give you a checkout that actually takes money. Kartify does: a branded storefront on your own domain, with an automated UPI payment gateway that verifies payments for you.</p>
+        <ul class="gpoints">
+          <li><b>Payment gateway included.</b> Automated UPI verification and WhatsApp checkout — JD &amp; Selloship don't offer this.</li>
+          <li><b>Products from JD, Selloship &amp; more.</b> Plus unregistered wholesalers competitors can't show you.</li>
+          <li><b>Add your own sources.</b> Paste any store URL and we scrape it straight into your catalogue.</li>
+          <li><b>Verified customers.</b> Mobile-OTP verification and email on every order.</li>
+          <li><b>Analytics + your own pixels.</b> Built-in reports, plus your GA4 and Meta Pixel.</li>
+          <li><b>Lightning-fast, on your domain.</b> Edge-hosted with free SSL and SEO-ready pages.</li>
+        </ul>
+        <a class="btn btn-primary" href="https://app.thekartify.com">Build your store free
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div>
+        <div class="cmock" aria-hidden="true">
+          <div class="cmock-top">Checkout · yourname.thekartify.com</div>
+          <div class="cmock-line"><span>Order total</span><b>₹₹₹</b></div>
+          <div class="cmock-upi"><span class="upi-dot"></span>Pay by UPI — verified automatically</div>
+          <div class="cmock-btn">Pay ₹₹₹</div>
+          <div class="cmock-foot">✓ Payment confirmed · order placed</div>
+        </div>
+        <div class="vs">On JD / Selloship: <b>no checkout, no payment gateway.</b></div>
+      </div>
+    </div>
+  </section>
+
   <hr class="rule">
 
   <!-- HOW IT WORKS -->
@@ -239,7 +409,7 @@
       <div class="step">
         <div class="n">01</div>
         <h3>Pick your products</h3>
-        <p>Browse ready catalogues and add whatever you want to sell. Never hold stock or pay upfront — pricing is yours to set.</p>
+        <p>Search the catalogue above and add whatever you want to sell. Never hold stock or pay upfront — pricing is yours to set.</p>
       </div>
       <div class="step">
         <div class="n">02</div>
@@ -261,12 +431,15 @@
       <h2>Everything a shop needs. Nothing you don't.</h2>
     </div>
     <div class="feat">
-      <div><h3><span class="b"></span>No inventory</h3><p>Sell from ready catalogues — we handle sourcing and stock, you keep the margin.</p></div>
-      <div><h3><span class="b"></span>No code</h3><p>A guided setup builds the storefront for you. If you can fill a form, you can launch.</p></div>
-      <div><h3><span class="b"></span>Your own address</h3><p>Launch on <span style="font-family:var(--font-mono);font-size:.9em">name.thekartify.com</span>, or connect a domain you own.</p></div>
-      <div><h3><span class="b"></span>UPI &amp; WhatsApp</h3><p>Get paid the way India already pays — instant UPI, or confirm the order on WhatsApp.</p></div>
-      <div><h3><span class="b"></span>Ready-made themes</h3><p>Premium layouts that make any catalogue look considered, on phone and desktop.</p></div>
-      <div><h3><span class="b"></span>Real analytics</h3><p>Visitors, orders and revenue at a glance — know what's working and what to stock next.</p></div>
+      <div><h3><span class="b"></span>No inventory</h3><p>Sell from ready catalogues across JD, Selloship and more — we handle sourcing and stock, you keep the margin.</p></div>
+      <div><h3><span class="b"></span>Payment gateway</h3><p>Automated UPI verification plus WhatsApp checkout — the piece JD and Selloship don't give you.</p></div>
+      <div><h3><span class="b"></span>Unregistered wholesalers</h3><p>Reach suppliers other platforms can't list — a catalogue your competitors simply don't have.</p></div>
+      <div><h3><span class="b"></span>Add your own sources</h3><p>Paste any Selloship or JDWebnship store URL and we scrape its products into your catalogue.</p></div>
+      <div><h3><span class="b"></span>Verified customers</h3><p>Mobile-OTP verification and email on every order, with confirmations and reminders sent for you.</p></div>
+      <div><h3><span class="b"></span>Analytics &amp; pixels</h3><p>Built-in visitor, order and revenue reports — and drop in your own GA4 and Meta Pixel.</p></div>
+      <div><h3><span class="b"></span>Your own address</h3><p>Launch on <span style="font-family:var(--font-mono);font-size:.9em">name.thekartify.com</span>, or connect a domain you own with free SSL.</p></div>
+      <div><h3><span class="b"></span>Premium themes</h3><p>Ready-made layouts that make any catalogue look considered, on phone and desktop.</p></div>
+      <div><h3><span class="b"></span>Lightning fast</h3><p>Edge-hosted storefronts that load instantly and stay SEO-ready as you grow.</p></div>
     </div>
   </section>
 
@@ -279,8 +452,6 @@
         <p>Every store gets its own address the moment it's live. Start on a Kartify subdomain, upgrade to your own domain whenever you're ready.</p>
       </div>
       <div class="urls">
-        <div class="url"><b>aanya</b>.thekartify.com</div>
-        <div class="url"><b>studionorth</b>.thekartify.com</div>
         <div class="url"><b>yourshop</b>.com</div>
       </div>
     </div>
@@ -314,9 +485,10 @@
       <h2>Good to know.</h2>
     </div>
     <div class="faq">
-      <details open><summary>Do I need my own products?<span class="pl"></span></summary><p>No. Pick from Kartify's ready catalogues — we handle sourcing and stock. You choose what to sell, set your prices, and keep the margin. Bringing your own products is optional, not required.</p></details>
-      <details><summary>How do my customers pay?<span class="pl"></span></summary><p>Customers pay by UPI, or send the order to you on WhatsApp to confirm. You can also switch on an automated payment gateway that verifies payments for you — your choice, per store.</p></details>
-      <details><summary>Can I use my own domain?<span class="pl"></span></summary><p>Yes. Every store starts on a free <span style="font-family:var(--font-mono);font-size:.9em">name.thekartify.com</span> address, and you can connect any domain you own whenever you're ready.</p></details>
+      <details open><summary>Do I need my own products?<span class="pl"></span></summary><p>No. Search Kartify's catalogue — JD, Selloship and more, plus unregistered wholesalers others don't list — and pick what to sell. We handle sourcing and stock; you set your prices and keep the margin. Bringing your own products is optional.</p></details>
+      <details><summary>How do my customers pay?<span class="pl"></span></summary><p>Customers pay by UPI, or send the order to you on WhatsApp to confirm. Our built-in payment gateway verifies payments automatically — the checkout JD and Selloship don't provide.</p></details>
+      <details><summary>Can I add sources JD or Selloship don't have?<span class="pl"></span></summary><p>Yes. Paste any Selloship or JDWebnship store URL and we scrape its products into your catalogue. You also get unregistered wholesalers competitors can't show.</p></details>
+      <details><summary>Can I use my own domain?<span class="pl"></span></summary><p>Yes. Every store starts on a free <span style="font-family:var(--font-mono);font-size:.9em">name.thekartify.com</span> address, and you can connect any domain you own whenever you're ready — with free SSL.</p></details>
       <details><summary>What does it cost to start?<span class="pl"></span></summary><p>Nothing. Open your store and take orders on the free plan. Paid plans unlock a custom domain, higher limits and more — only when you need them.</p></details>
     </div>
   </section>
@@ -330,7 +502,7 @@
       <a class="btn btn-primary" href="https://app.thekartify.com">Start free
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <div class="addr"><span class="dot"></span>Claim <b>yourname.thekartify.com</b></div>
+      <div class="addr"><span class="dot"></span>Claim <b>yourshop.com</b></div>
     </section>
   </div>
 </main>
@@ -340,14 +512,59 @@
     <a class="brand" href="#top"><span class="mark"></span>Kartify</a>
     <div class="meta">© 2026 Kartify — launch your store, minus the hard parts.</div>
     <nav>
+      <a href="#search">Search products</a>
       <a href="https://app.thekartify.com">Start free</a>
       <a href="https://app.thekartify.com">Log in</a>
-      <a href="#how">How it works</a>
     </nav>
   </div>
 </footer>
 
+<!-- signup gate -->
+<div class="gate" id="gate" hidden>
+  <div class="gate-card">
+    <button class="gate-x" id="gate-x" aria-label="Close">×</button>
+    <h3>You've used your free views</h3>
+    <p>Sign up free with your mobile number to unlock 50 more product views — and start building your store.</p>
+    <a class="btn btn-primary" href="https://app.thekartify.com">Sign up free →</a>
+  </div>
+</div>
+
+<!-- register-your-number promo (inline mobile + OTP) -->
+<div class="gate" id="promo" hidden>
+  <div class="gate-card">
+    <button class="gate-x" id="promo-x" aria-label="Close">×</button>
+    <h3>Register your number for full access</h3>
+    <p>Register yourself to unlock the full catalogue, and your own store. Free, no card needed.</p>
+    <div class="serr" id="promo-err" hidden></div>
+
+    <div id="promo-phone" style="margin-top:16px">
+      <div class="otp-row">
+        <span class="cc">+91</span>
+        <input class="sinput" id="promo-mobile" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number" autocomplete="tel" style="flex:1">
+      </div>
+      <button class="btn btn-primary otp-btn" id="promo-send">Send OTP</button>
+    </div>
+
+    <div id="promo-code" hidden style="margin-top:16px">
+      <p id="promo-code-note" style="font-size:13px; color:var(--ink-soft); margin-bottom:10px">Enter the 6-digit code we sent you.</p>
+      <input class="sinput" id="promo-otp" type="tel" inputmode="numeric" maxlength="6" placeholder="6-digit code" autocomplete="one-time-code" style="width:100%">
+      <button class="btn btn-primary otp-btn" id="promo-verify">Verify &amp; unlock</button>
+      <button class="link-clear" id="promo-back" style="margin-top:10px">← Change number</button>
+    </div>
+
+    <div id="promo-done" hidden style="margin-top:16px">
+      <p style="color:var(--accent); font-size:14px">✓ Verified — full catalogue unlocked.</p>
+      <a class="btn btn-primary otp-btn" href="https://app.thekartify.com">Build your store →</a>
+    </div>
+
+    <div id="promo-recaptcha"></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
 <script>
+  /* theme toggle */
   (function(){
     var root=document.documentElement, KEY="kartify-theme";
     function sysDark(){ return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
@@ -358,6 +575,226 @@
       root.setAttribute("data-theme", next);
       try{ localStorage.setItem(KEY, next); }catch(e){}
     });
+  })();
+
+  /* catalogue search — hits the same public /search API as the app; anonymous
+     device-id, free browse, redirect-to-signup on the 403 quota gate. */
+  (function(){
+    var API="https://43.204.135.214.sslip.io";
+    var $=function(id){ return document.getElementById(id); };
+    var inr=function(n){ return "₹"+Number(n||0).toLocaleString("en-IN"); };
+    var FILTERS=["q","category","stock","sort","brand","size","source","pmin","pmax"];
+    var page=1, hasMore=false, loading=false, items=[], t;
+
+    function deviceId(){
+      try{ var d=localStorage.getItem("kartify-dev");
+        if(!d){ d=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now()+"-"+Math.random().toString(36).slice(2)); localStorage.setItem("kartify-dev",d); }
+        return d;
+      }catch(e){ return "anon-"+Math.random().toString(36).slice(2); }
+    }
+    var DEV=deviceId();
+
+    function authToken(){ try{ return localStorage.getItem("kartify-token")||""; }catch(e){ return ""; } }
+    function H(extra){ var h={"x-device-id":DEV}, t=authToken(); if(t)h["Authorization"]="Bearer "+t; if(extra){ for(var k in extra) h[k]=extra[k]; } return h; }
+
+    function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+    function buildParams(reset){
+      var p=reset?1:page+1;
+      var u=new URLSearchParams();
+      var q=$("q").value.trim(); if(q)u.set("q",q);
+      var cat=$("category").value; if(cat)u.set("category",cat);
+      var stock=$("stock").value; if(stock)u.set("stock",stock);
+      var sort=$("sort").value; if(sort&&sort!=="newest")u.set("sort",sort);
+      var brand=$("brand").value.trim(); if(brand)u.set("brand",brand);
+      var size=$("size").value.trim(); if(size)u.set("size",size);
+      var src=$("source").value; if(src)u.set("source",src);
+      var pmin=$("pmin").value; if(pmin)u.set("price_min",pmin);
+      var pmax=$("pmax").value; if(pmax)u.set("price_max",pmax);
+      u.set("page",p); u.set("limit",24);
+      return {u:u,p:p};
+    }
+
+    function renderQuota(qt){
+      if(!qt) return;
+      if(qt.unlimited){ $("quota").innerHTML="✓ Unlimited views"; return; }
+      var rem=(qt.remaining==null)?0:qt.remaining;
+      $("quota").innerHTML="<b>"+rem+"</b> free product view"+(rem===1?"":"s")+" left";
+    }
+
+    function card(p){
+      var img=p.image?('<img src="'+esc(p.image)+'" alt="'+esc(p.name)+'" loading="lazy">'):'<div class="noimg">No image</div>';
+      var oos=p.in_stock?"":'<span class="oos">Out of stock</span>';
+      var brand=p.brand?('<div class="pbrand">'+esc(p.brand)+'</div>'):"";
+      var sizes=(p.sizes&&p.sizes.length)?('<div class="psizes">Sizes: '+esc(p.sizes.slice(0,8).join(", "))+'</div>'):"";
+      return '<div class="pcard" data-cat="'+esc(p.category)+'" data-id="'+esc(p.productId)+'" data-url="'+esc(p.product_url)+'">'
+        +'<div class="pthumb">'+img+oos+'<span class="pcat">'+esc(p.category)+'</span></div>'
+        +'<div class="pbody">'+brand+'<div class="pname">'+esc(p.name)+'</div>'
+        +'<div class="pprice">'+inr(p.original_price)+'</div>'+sizes
+        +'<span class="popen">View product ↗</span></div></div>';
+    }
+
+    function render(){
+      $("results").innerHTML=items.map(card).join("");
+      if(items.length===0){ $("sstate").hidden=false; $("sstate").textContent="No products match — try another search."; }
+      else $("sstate").hidden=true;
+      $("more-wrap").hidden=!hasMore;
+    }
+
+    function run(reset){
+      if(loading) return; loading=true;
+      var bp=buildParams(reset);
+      $("serr").hidden=true;
+      if(reset){ $("sstate").hidden=false; $("sstate").textContent="Loading…"; }
+      fetch(API+"/search/catalogue?"+bp.u.toString(),{headers:H()})
+        .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
+        .then(function(res){
+          if(!res.ok) throw new Error(res.j.error||"Search failed");
+          items = reset ? (res.j.results||[]) : items.concat(res.j.results||[]);
+          page=bp.p; hasMore=!!res.j.hasMore;
+          renderQuota(res.j.quota); render();
+        })
+        .catch(function(e){ $("serr").hidden=false; $("serr").textContent=e.message; if(items.length===0){$("sstate").hidden=true;} })
+        .finally(function(){ loading=false; });
+    }
+
+    function openProduct(cat,id,url){
+      fetch(API+"/search/consume",{method:"POST",headers:H({"content-type":"application/json"}),body:JSON.stringify({category:cat,productId:id})})
+        .then(function(r){ return r.json().then(function(j){ return {status:r.status,j:j}; }); })
+        .then(function(res){
+          renderQuota(res.j.quota);
+          if(res.status===403){ $("gate").hidden=false; return; }
+          window.open(url,"_blank","noopener");
+        })
+        .catch(function(){ window.open(url,"_blank","noopener"); });
+    }
+
+    function toggleClear(){
+      var on=$("q").value||$("brand").value||$("size").value||$("pmin").value||$("pmax").value
+        ||$("category").value||$("source").value||$("stock").value!=="in"||$("sort").value!=="newest";
+      $("clear").hidden=!on;
+    }
+    function schedule(){ clearTimeout(t); t=setTimeout(function(){ run(true); },350); }
+
+    /* wire filters */
+    FILTERS.forEach(function(id){
+      var el=$(id);
+      el.addEventListener(el.tagName==="SELECT"?"change":"input",function(){ toggleClear(); schedule(); });
+    });
+    $("clear").addEventListener("click",function(){
+      ["q","brand","size","pmin","pmax"].forEach(function(id){ $(id).value=""; });
+      $("category").value=""; $("stock").value="in"; $("sort").value="newest"; $("source").value="";
+      toggleClear(); run(true);
+    });
+    $("results").addEventListener("click",function(e){
+      var c=e.target.closest(".pcard"); if(!c) return;
+      openProduct(c.getAttribute("data-cat"),c.getAttribute("data-id"),c.getAttribute("data-url"));
+    });
+    $("more").addEventListener("click",function(){ run(false); });
+
+    /* hero search feeds the section */
+    $("heroform").addEventListener("submit",function(e){
+      e.preventDefault();
+      $("q").value=$("heroq").value; toggleClear();
+      document.getElementById("search").scrollIntoView({behavior:"smooth"});
+      run(true);
+    });
+
+    /* gate modal */
+    $("gate-x").addEventListener("click",function(){ $("gate").hidden=true; });
+    $("gate").addEventListener("click",function(e){ if(e.target===$("gate")) $("gate").hidden=true; });
+
+    /* load source filter options */
+    fetch(API+"/search/sources").then(function(r){ return r.json(); }).then(function(j){
+      var sel=$("source");
+      (j.sources||[]).forEach(function(x){
+        var o=document.createElement("option"); o.value=x.id; o.textContent=x.name+" ("+x.category+")"; sel.appendChild(o);
+      });
+    }).catch(function(){});
+
+    /* after OTP login (from the promo) — refresh to the signed-in quota */
+    window.kartifyAfterAuth=function(){ run(true); };
+
+    /* initial load */
+    run(true);
+  })();
+
+  /* register-your-number promo — inline mobile + OTP via Firebase phone auth.
+     Same flow as the app: signInWithPhoneNumber -> confirm(code) -> exchange the
+     Firebase idToken at /search-auth/firebase for our JWT. The FIREBASE values
+     are PUBLIC client keys (already shipped in the app bundle), not secrets. */
+  (function(){
+    var API="https://43.204.135.214.sslip.io";
+    var FIREBASE={
+      apiKey:"AIzaSyCKl0bG54ZOfsRn7TLQJIaRyJPEhUeJVLE",
+      authDomain:"firstauthntic.firebaseapp.com",
+      projectId:"firstauthntic",
+      appId:"1:873700421229:web:6fb1861a197d2981a21964",
+      messagingSenderId:"873700421229"
+    };
+    var $=function(id){ return document.getElementById(id); };
+    var promo=$("promo"), gate=$("gate");
+    var auth=null, verifier=null, confirmation=null;
+
+    function seen(){ try{ return sessionStorage.getItem("kartify-promo"); }catch(e){ return false; } }
+    function mark(){ try{ sessionStorage.setItem("kartify-promo","1"); }catch(e){} }
+    function close(){ promo.hidden=true; }
+    function err(m){ var e=$("promo-err"); if(m){ e.hidden=false; e.textContent=m; } else e.hidden=true; }
+    function fbReady(){ return typeof firebase!=="undefined" && FIREBASE.apiKey; }
+    function fbAuth(){ if(!auth){ if(!firebase.apps.length) firebase.initializeApp(FIREBASE); auth=firebase.auth(); } return auth; }
+    function e164(m){ var d=String(m||"").replace(/\D/g,""); return d.length===10?"+91"+d:"+"+d; }
+
+    $("promo-mobile").addEventListener("input",function(){ this.value=this.value.replace(/\D/g,"").slice(0,10); });
+    $("promo-otp").addEventListener("input",function(){ this.value=this.value.replace(/\D/g,"").slice(0,6); });
+
+    $("promo-send").addEventListener("click",function(){
+      var m=$("promo-mobile").value.replace(/\D/g,"").slice(0,10);
+      if(m.length!==10){ err("Enter a valid 10-digit mobile number."); return; }
+      if(!fbReady()){ err("OTP isn't available right now — please try again shortly."); return; }
+      err(""); var b=this; b.disabled=true; b.textContent="Sending…";
+      try{
+        var a=fbAuth();   // initializeApp() runs here — must precede RecaptchaVerifier
+        if(!verifier) verifier=new firebase.auth.RecaptchaVerifier("promo-recaptcha",{size:"invisible"});
+        a.signInWithPhoneNumber(e164(m),verifier)
+          .then(function(cr){
+            confirmation=cr;
+            $("promo-phone").hidden=true; $("promo-code").hidden=false;
+            $("promo-code-note").textContent="Enter the 6-digit code sent to +91 "+m+".";
+            $("promo-otp").focus();
+          })
+          .catch(function(e){ try{ verifier.clear(); }catch(x){} verifier=null; err(e.message||"Could not send the code."); })
+          .finally(function(){ b.disabled=false; b.textContent="Send OTP"; });
+      }catch(e){ err(e.message); b.disabled=false; b.textContent="Send OTP"; }
+    });
+
+    $("promo-verify").addEventListener("click",function(){
+      var code=$("promo-otp").value.replace(/\D/g,"").slice(0,6);
+      if(code.length<4){ err("Enter the code from the SMS."); return; }
+      if(!confirmation){ err("Please request a new code."); return; }
+      err(""); var b=this; b.disabled=true; b.textContent="Verifying…";
+      confirmation.confirm(code)
+        .then(function(cred){ return cred.user.getIdToken(); })
+        .then(function(idToken){
+          return fetch(API+"/search-auth/firebase",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({idToken:idToken})})
+            .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); });
+        })
+        .then(function(res){
+          if(!res.ok) throw new Error(res.j.error||"Verification failed");
+          try{ localStorage.setItem("kartify-token",res.j.token); }catch(e){}
+          if(window.kartifyAfterAuth) window.kartifyAfterAuth();
+          $("promo-code").hidden=true; $("promo-done").hidden=false;
+        })
+        .catch(function(e){ err(e.message||"Invalid or expired code."); })
+        .finally(function(){ b.disabled=false; b.textContent="Verify & unlock"; });
+    });
+
+    $("promo-back").addEventListener("click",function(){ $("promo-code").hidden=true; $("promo-phone").hidden=false; err(""); });
+    $("promo-x").addEventListener("click",close);
+    promo.addEventListener("click",function(e){ if(e.target===promo) close(); });
+
+    /* show once per session, ~15s in, and never stacked on the quota gate */
+    if(seen()) return;
+    setTimeout(function(){ if(seen()||!gate.hidden) return; promo.hidden=false; mark(); }, 15000);
   })();
 </script>
 </body>
