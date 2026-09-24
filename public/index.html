@@ -143,6 +143,7 @@
   .serr{background:color-mix(in srgb,#d92d20 12%, var(--surface)); border:1px solid color-mix(in srgb,#d92d20 40%, transparent); color:#c0392b; padding:9px 13px; border-radius:9px; margin-top:14px; font-size:13px}
 
   .pgrid{display:grid; grid-template-columns:repeat(auto-fill, minmax(178px,1fr)); gap:14px; margin-top:22px}
+  @media (max-width:560px){ .pgrid{grid-template-columns:repeat(2,1fr); gap:10px} }
   .pcard{border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface); display:flex; flex-direction:column; cursor:pointer; transition:transform .12s ease, border-color .12s ease}
   .pcard:hover{transform:translateY(-2px); border-color:var(--accent)}
   .pthumb{aspect-ratio:1/1; background:var(--paper); position:relative}
@@ -158,6 +159,17 @@
   .popen{margin-top:auto; display:inline-flex; align-items:center; gap:4px; font-size:11.5px; color:var(--accent); padding-top:6px}
   .sstate{text-align:center; color:var(--ink-soft); padding:40px 0; font-size:14px}
   .morewrap{text-align:center; margin-top:24px}
+
+  /* ---- catalogue hamburger menu ---- */
+  .search-head{display:flex; justify-content:space-between; align-items:flex-start; gap:16px}
+  .catmenu{position:relative; flex:0 0 auto; margin-top:6px}
+  .catmenu-btn{display:inline-flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:10px; padding:9px 14px; font-family:var(--font-display); font-weight:600; font-size:14px; cursor:pointer}
+  .catmenu-btn:hover{border-color:var(--ink)}
+  .catmenu-btn svg{width:18px; height:18px}
+  .catmenu-panel{position:absolute; right:0; top:calc(100% + 8px); background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:6px; min-width:210px; box-shadow:0 18px 40px -24px rgba(20,18,10,.5); z-index:15}
+  .catmenu-item{display:block; width:100%; text-align:left; background:none; border:0; padding:10px 12px; border-radius:8px; font-size:14px; color:var(--ink); cursor:pointer; font-family:var(--font-body)}
+  .catmenu-item:hover{background:var(--accent-wash); color:var(--accent)}
+  @media (max-width:640px){ .catmenu-btn span{display:none} .catmenu-btn{padding:9px 11px} }
 
   /* ---- gate modal ---- */
   .gate{position:fixed; inset:0; background:rgba(14,13,9,.55); display:grid; place-items:center; z-index:1000; padding:18px}
@@ -321,10 +333,26 @@
 
   <!-- CATALOGUE SEARCH -->
   <section id="search" class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Live catalogue</span>
-      <h2>Search everything you can sell.</h2>
-      <p>Every product across JD, Selloship and our reseller network — plus unregistered wholesalers that other platforms don't list. Browse free; sign up when you want to save products and start selling.</p>
+    <div class="search-head">
+      <div class="sec-head">
+        <span class="eyebrow">Live catalogue</span>
+        <h2>Search everything you can sell.</h2>
+        <p>Every product across JD, Selloship and our reseller network — plus unregistered wholesalers that other platforms don't list. Browse free; sign up when you want to save products and start selling.</p>
+      </div>
+      <div class="catmenu">
+        <button class="catmenu-btn" id="catmenu-btn" aria-haspopup="true" aria-expanded="false" aria-label="Catalogue menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <span>Menu</span>
+        </button>
+        <div class="catmenu-panel" id="catmenu-panel" hidden>
+          <button class="catmenu-item" data-go="https://app.thekartify.com">My dashboard</button>
+          <button class="catmenu-item" data-go="https://app.thekartify.com">Saved products</button>
+          <button class="catmenu-item" data-go="https://app.thekartify.com">My orders</button>
+          <button class="catmenu-item" data-go="https://app.thekartify.com">Add a source</button>
+          <button class="catmenu-item" data-go="https://app.thekartify.com">Plans &amp; pricing</button>
+          <button class="catmenu-item" data-go="https://app.thekartify.com">Build your store</button>
+        </div>
+      </div>
     </div>
 
     <div class="sbox">
@@ -519,17 +547,7 @@
   </div>
 </footer>
 
-<!-- signup gate -->
-<div class="gate" id="gate" hidden>
-  <div class="gate-card">
-    <button class="gate-x" id="gate-x" aria-label="Close">×</button>
-    <h3>You've used your free views</h3>
-    <p>Sign up free with your mobile number to unlock 50 more product views — and start building your store.</p>
-    <a class="btn btn-primary" href="https://app.thekartify.com">Sign up free →</a>
-  </div>
-</div>
-
-<!-- register-your-number promo (inline mobile + OTP) -->
+<!-- register-your-number promo (inline mobile + OTP) — also the "free views used up" gate -->
 <div class="gate" id="promo" hidden>
   <div class="gate-card">
     <button class="gate-x" id="promo-x" aria-label="Close">×</button>
@@ -663,7 +681,11 @@
         .then(function(r){ return r.json().then(function(j){ return {status:r.status,j:j}; }); })
         .then(function(res){
           renderQuota(res.j.quota);
-          if(res.status===403){ $("gate").hidden=false; return; }
+          if(res.status===403){
+            if(res.j.need==="plan") window.open("https://app.thekartify.com","_blank","noopener");
+            else if(window.kartifyShowPromo) window.kartifyShowPromo();   // free views used up -> same promo (OTP)
+            return;
+          }
           window.open(url,"_blank","noopener");
         })
         .catch(function(){ window.open(url,"_blank","noopener"); });
@@ -700,10 +722,6 @@
       run(true);
     });
 
-    /* gate modal */
-    $("gate-x").addEventListener("click",function(){ $("gate").hidden=true; });
-    $("gate").addEventListener("click",function(e){ if(e.target===$("gate")) $("gate").hidden=true; });
-
     /* load source filter options */
     fetch(API+"/search/sources").then(function(r){ return r.json(); }).then(function(j){
       var sel=$("source");
@@ -733,13 +751,17 @@
       messagingSenderId:"873700421229"
     };
     var $=function(id){ return document.getElementById(id); };
-    var promo=$("promo"), gate=$("gate");
+    var promo=$("promo");
     var auth=null, verifier=null, confirmation=null;
 
     function seen(){ try{ return sessionStorage.getItem("kartify-promo"); }catch(e){ return false; } }
     function mark(){ try{ sessionStorage.setItem("kartify-promo","1"); }catch(e){} }
+    function hasToken(){ try{ return !!localStorage.getItem("kartify-token"); }catch(e){ return false; } }
     function close(){ promo.hidden=true; }
     function err(m){ var e=$("promo-err"); if(m){ e.hidden=false; e.textContent=m; } else e.hidden=true; }
+    /* reset to the phone step and open — also the shared "login first" entry point */
+    function show(){ err(""); $("promo-phone").hidden=false; $("promo-code").hidden=true; $("promo-done").hidden=true; promo.hidden=false; mark(); }
+    window.kartifyShowPromo=show;
     function fbReady(){ return typeof firebase!=="undefined" && FIREBASE.apiKey; }
     function fbAuth(){ if(!auth){ if(!firebase.apps.length) firebase.initializeApp(FIREBASE); auth=firebase.auth(); } return auth; }
     function e164(m){ var d=String(m||"").replace(/\D/g,""); return d.length===10?"+91"+d:"+"+d; }
@@ -783,6 +805,7 @@
           try{ localStorage.setItem("kartify-token",res.j.token); }catch(e){}
           if(window.kartifyAfterAuth) window.kartifyAfterAuth();
           $("promo-code").hidden=true; $("promo-done").hidden=false;
+          if(window.__kartifyPendingGo){ window.open(window.__kartifyPendingGo,"_blank","noopener"); window.__kartifyPendingGo=null; }
         })
         .catch(function(e){ err(e.message||"Invalid or expired code."); })
         .finally(function(){ b.disabled=false; b.textContent="Verify & unlock"; });
@@ -792,10 +815,46 @@
     $("promo-x").addEventListener("click",close);
     promo.addEventListener("click",function(e){ if(e.target===promo) close(); });
 
-    /* show once per session, ~15s in, and never stacked on the quota gate */
-    if(seen()) return;
-    setTimeout(function(){ if(seen()||!gate.hidden) return; promo.hidden=false; mark(); }, 15000);
+    /* auto-open once per session, 5s in — skip if already shown or already registered */
+    if(!seen() && !hasToken()) setTimeout(function(){ if(!seen() && !hasToken()) show(); }, 5000);
+  })();
+
+  /* catalogue hamburger menu — every item requires login: open the promo (OTP)
+     first, then continue to the app once verified. */
+  (function(){
+    var btn=document.getElementById("catmenu-btn"), panel=document.getElementById("catmenu-panel");
+    if(!btn||!panel) return;
+    function setOpen(open){ panel.hidden=!open; btn.setAttribute("aria-expanded",String(open)); }
+    btn.addEventListener("click",function(e){ e.stopPropagation(); setOpen(panel.hidden); });
+    document.addEventListener("click",function(){ if(!panel.hidden) setOpen(false); });
+    panel.addEventListener("click",function(e){ e.stopPropagation(); });
+    panel.querySelectorAll(".catmenu-item").forEach(function(it){
+      it.addEventListener("click",function(){
+        setOpen(false);
+        var go=it.getAttribute("data-go"), loggedIn=false;
+        try{ loggedIn=!!localStorage.getItem("kartify-token"); }catch(e){}
+        if(loggedIn){ window.open(go,"_blank","noopener"); }
+        else { window.__kartifyPendingGo=go; if(window.kartifyShowPromo) window.kartifyShowPromo(); }
+      });
+    });
   })();
 </script>
+
+<!-- Ask on WhatsApp — bottom-left, matching the portal. Opens our support number
+     with a prefilled first line so the assistant knows where they came from. -->
+<style>
+  .wa-fab{position:fixed; left:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; gap:8px;
+    background:#25D366; color:#0b2b16; font-weight:700; font-size:14px; padding:12px 17px; border-radius:999px;
+    text-decoration:none; box-shadow:0 6px 20px rgba(0,0,0,.22)}
+  .wa-fab:hover{filter:brightness(1.05)}
+  @media (max-width:520px){ .wa-fab{font-size:13px; padding:11px 15px} }
+</style>
+<a class="wa-fab" target="_blank" rel="noopener" aria-label="Ask on WhatsApp"
+   href="https://wa.me/919106785898?text=Hi%2C%20I%20saw%20your%20website%20—%20I%20want%20to%20know%20about%20starting%20my%20own%20online%20store.">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.8.8-1 1.9-.6 3.1a10 10 0 0 0 4.6 4.8c1.7.7 2.4.8 3.2.7.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
+  </svg>
+  Ask on WhatsApp
+</a>
 </body>
 </html>
