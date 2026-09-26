@@ -882,10 +882,8 @@
         +'</div>';
     }
     fetch(API+"/auth/plans").then(function(r){ return r.json(); }).then(function(j){
-      var all=(j.plans||[]).filter(function(p){ return p.active!==false; });
-      var plans=all.filter(function(p){ return !p.show_on_search; });   // storefront plans, not the search-only plan
-      if(!plans.length) plans=all;                                      // fallback: show whatever is active
-      if(!plans.length) return;                                         // keep the static fallback
+      var plans=(j.plans||[]).filter(function(p){ return p.active!==false; });  // all active plans (Free, ₹99, Standard, Pro)
+      if(!plans.length) return;                                                 // keep the static fallback
       var top=-1, topPrice=-1;
       plans.forEach(function(p,i){ var pr=Number(p.discount_price!=null&&p.discount_price!==""?p.discount_price:p.price)||0; if(pr>topPrice){topPrice=pr;top=i;} });
       box.innerHTML=plans.map(function(p,i){ return card(p, i===top && topPrice>0); }).join("");
